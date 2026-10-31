@@ -1,0 +1,19 @@
+# Local clinical data and derived patient assets must stay outside this repository.
+*.dcm
+*.nii
+*.nii.gz
+*.nrrd
+*.mrb
+*.obj
+*.stl
+*.png
+*.jpg
+*.jpeg
+*.bin
+web/timeline.json
+web/aligned_scene/
+web/eye_models/
+web/slices/
+web/models/
+web/qa/
+
