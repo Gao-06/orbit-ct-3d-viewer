@@ -137,17 +137,17 @@ function renderVolumeChart(){
     const side=sides[series],key=series===0?'left-line':'right-line',color=series===0?'#e33b3b':'#1d9b59';
     const points=values[series].map((value,index)=>`${index?'L':'M'}${x(index).toFixed(1)},${y(value).toFixed(1)}`).join(' ');
     svg+=`<path class="line ${key}" d="${points}"/>`;
-    values[series].forEach((value,index)=>{const active=index===state.ctIndex;svg+=`<circle class="point ${active?'active':''}" data-date-index="${index}" cx="${x(index).toFixed(1)}" cy="${y(value).toFixed(1)}" r="${active?5:3.7}" fill="${color}"><title>${dateLabel(timeline[index].date)} ${side==='left'?'左侧（健侧）':'右侧（患侧）'} ${value.toFixed(4)} cm³</title></circle>`;});
+    values[series].forEach((value,index)=>{const active=index===state.ctIndex;svg+=`<circle class="point ${active?'active':''}" data-date-index="${index}" cx="${x(index).toFixed(1)}" cy="${y(value).toFixed(1)}" r="${active?5:3.7}" fill="${color}"><title>${dateLabel(timeline[index].date)} ${side==='left'?'左侧':'右侧'} ${value.toFixed(4)} cm³</title></circle>`;});
   }
   timeline.forEach((item,index)=>{const label=item.date.slice(4,6)+'/'+item.date.slice(6,8);svg+=`<text x="${x(index)}" y="${height-18}" text-anchor="middle"><title>${dateLabel(item.date)}</title>${label}</text>`;});
-  svg+='</svg><div class="chart-legend"><span><i class="left-dot"></i>左侧（健侧）网格体积</span><span><i class="right-dot"></i>右侧（患侧）网格体积</span></div>';$('volumeChart').innerHTML=svg;
+  svg+='</svg><div class="chart-legend"><span><i class="left-dot"></i>左侧网格体积</span><span><i class="right-dot"></i>右侧网格体积</span></div>';$('volumeChart').innerHTML=svg;
 }
 function updateData(){
   const item=timeline[state.ctIndex];
   const skullVolume=Number(timeline[0].segments.skull.volume_cm3_lm);
   const left=volumeFor(item,'left');
   const right=volumeFor(item,'right');
-  $('volumes').innerHTML=`<table><tr><td>固定颅骨参考</td><td>${skullVolume.toFixed(3)} cm³</td></tr><tr><td>左侧（健侧）网格体积</td><td>${left.toFixed(4)} cm³</td></tr><tr><td>右侧（患侧）网格体积</td><td>${right.toFixed(4)} cm³</td></tr><tr><td>小侧 / 大侧</td><td>${(Math.min(left,right)/Math.max(left,right)).toFixed(5)}</td></tr></table>`;
+  $('volumes').innerHTML=`<table><tr><td>固定颅骨参考</td><td>${skullVolume.toFixed(3)} cm³</td></tr><tr><td>左侧网格体积</td><td>${left.toFixed(4)} cm³</td></tr><tr><td>右侧网格体积</td><td>${right.toFixed(4)} cm³</td></tr><tr><td>小侧 / 大侧</td><td>${(Math.min(left,right)/Math.max(left,right)).toFixed(5)}</td></tr></table>`;
   $('volumeNote').textContent='按修复后的显示模型计算外形体积。日期节点等距，曲线仅统计检查日期的模型；中间形状为几何插值。';
   renderVolumeChart();
   $('ctDate').textContent='当前 CT：'+dateLabel(item.date)+'（实际检查）';

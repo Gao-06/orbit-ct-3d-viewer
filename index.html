@@ -12,12 +12,12 @@
   <div class="playback"><button id="play" disabled aria-pressed="false">▶ 播放</button> <small>每段约 10 秒 · 拖动即暂停</small></div>
   <div id="timeLabel">正在读取手动对齐的场景…</div>
   <div id="timeMode"></div>
-  <div class="layers"><label><input id="skull" type="checkbox" checked>颅骨</label> <label><input id="left" type="checkbox" checked>左侧（健侧）</label> <label><input id="right" type="checkbox" checked>右侧（患侧）</label></div>
+  <div class="layers"><label><input id="skull" type="checkbox" checked>颅骨</label> <label><input id="left" type="checkbox" checked>左侧</label> <label><input id="right" type="checkbox" checked>右侧</label></div>
   <label>骨骼透明度 <input id="opacity" type="range" min=".05" max="1" step=".01" value=".35"></label>
   <div><button id="resetView">恢复正面</button> <small>拖动转头 · 滚轮缩放</small></div>
   <p id="selection" role="status" aria-live="polite">正在加载…</p>
 </section>
-<aside id="data" class="panel"><b>体积数据（No.1）</b><div class="hint">修复后模型外形体积</div><div id="volumes">正在读取…</div><div id="volumeChart" aria-label="实际检查时间点左右眼网格体积折线图"></div><p class="hint" id="volumeNote"></p><hr><div id="ctDate"></div><p class="hint">中间形状为几何插值。CT 显示最近一次真实检查；点击模型可联动下方三视图。</p></aside>
+<aside id="data" class="panel"><b>体积数据</b><div class="hint">修复后模型外形体积</div><div id="volumes">正在读取…</div><div id="volumeChart" aria-label="实际检查时间点左右眼网格体积折线图"></div><p class="hint" id="volumeNote"></p><hr><div id="ctDate"></div><p class="hint">中间形状为几何插值。CT 显示最近一次真实检查；点击模型可联动下方三视图。</p></aside>
 <section id="views" class="panel" aria-label="CT 三视图">
   <div class="view"><b>轴向</b> <span id="axialNo"></span><div class="image-frame" id="axialFrame"><img id="axialView" alt="轴向 CT 切片"></div><small>滚轮切片 · 从头顶到下方</small></div>
   <div class="view"><b>冠状</b> <span id="coronalNo"></span><div class="image-frame" id="coronalFrame"><img id="coronalView" alt="冠状 CT 切片"></div><small>滚轮切换前后位置</small></div>

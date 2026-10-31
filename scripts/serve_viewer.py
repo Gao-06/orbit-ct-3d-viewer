@@ -31,7 +31,7 @@ class Handler(SimpleHTTPRequestHandler):
 
 if __name__ == '__main__':
     parser=argparse.ArgumentParser()
-    parser.add_argument('--port', type=int, default=8000)
+    parser.add_argument('--port', type=int, default=8765)
     args=parser.parse_args()
     print(f'CT viewer: http://127.0.0.1:{args.port}/index.html', flush=True)
     ThreadingHTTPServer(('127.0.0.1',args.port),Handler).serve_forever()

@@ -1,0 +1,7 @@
+from pathlib import Path
+p=Path('index.html');s=p.read_text(encoding='utf-8');s=s.replace('<div id="volumes">','<label class="hint">体积口径 <select id="volumeBasis" aria-label="体积口径"><option value="display">显示模型外形体积</option><option value="original">原始网格体积（含内腔）</option></select></label><div id="volumes">');s=s.replace('solid-completion-1','right-completion-2');p.write_text(s,encoding='utf-8')
+p=Path('web/viewer.mjs');s=p.read_text(encoding='utf-8');anchor='function renderVolumeChart(){';s=s.replace(anchor,"function volumeFor(item,side){return Number($('volumeBasis').value==='original'?item.meshMeasurements?.[side]?.volumeCm3:item.displayMeasurements?.[side]?.volumeCm3);}\n"+anchor)
+s=s.replace('Number(t.meshMeasurements?.[side]?.volumeCm3)','volumeFor(t,side)');s=s.replace('Number(item.meshMeasurements?.left?.volumeCm3??item.segments.left_orbit.volume_cm3_cs)',"volumeFor(item,'left')");s=s.replace('Number(item.meshMeasurements?.right?.volumeCm3??item.segments.right_orbit.volume_cm3_cs)',"volumeFor(item,'right')")
+s=s.replace("$('volumeNote').textContent='折线使用五个实际检查日期的眼眶闭合网格体积；日期点等距排列。显示模型含可视化内腔补全；曲线保留原始网格测量值，补全与插值均不作为测量。';","$('volumeNote').textContent=$('volumeBasis').value==='original'?'原始网格口径包含标注内腔；该体积仅反映输入网格，不代表器官真实外形。':'显示模型外形体积按当前可视化网格计算；并非临床测量。日期节点等距，插值帧不计入曲线。';")
+s=s.replace("$('opacity').oninput", "$('volumeBasis').onchange=()=>{if(state.ready)updateData();};\n$('opacity').oninput")
+s=s.replace('左右眼实际检查日期闭合网格体积，单位立方厘米','左右眼所选口径网格体积，单位立方厘米');s=s.replace('solid-1','solid-2');p.write_text(s,encoding='utf-8')

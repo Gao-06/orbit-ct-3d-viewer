@@ -1,0 +1,3 @@
+from pathlib import Path
+p=Path('web/morph-worker.mjs');s=p.read_text(encoding='utf-8');s="import {mainSurface} from './morph-surface-cleanup.mjs';\n"+s;s=s.replace('const positions=mc.positionArray.slice(0,mc.count*3),normals=mc.normalArray.slice(0,mc.count*3);','let positions=mc.positionArray.slice(0,mc.count*3),normals=mc.normalArray.slice(0,mc.count*3);\n        if(side===\'right\'&&data.a===3&&data.b===4)({positions,normals}=mainSurface(positions,normals));');p.write_text(s,encoding='utf-8')
+p=Path('scripts/render_right_completion.py');s=p.read_text(encoding='utf-8').replace('a*.15+x*.85','a*.25+x*.75').replace('85%','75%');p.write_text(s,encoding='utf-8')
